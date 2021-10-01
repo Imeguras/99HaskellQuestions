@@ -18,9 +18,26 @@ Example in Haskell:
 import Data.List
 import System.IO 
 
-tailor :: [a] -> a 
-tailor xs = do
-    xs[3]
+dec :: Int -> Int
+dec t = do
+    t-1
+
+-- fine ill just aim  for the answer
+{-tailor :: [a] -> a -> a 
+tailor xs t = do
+    let loop = do
+        dec t
+        print(head(xs))
+        drop 1 xs
+        when(t\=0)
+    loop
+    return head(xs)
+-}
+tailor :: [a] -> Int -> a
+tailor xs t = do
+    head(drop t xs)   
+    --return head xs
+    
 
 main = do
-    print (show (tailor [3, 5, 6]))
+    print (show (tailor [3, 5, 6] 0))
