@@ -11,13 +11,16 @@ Example in Haskell:
 3
 λ> myButLast ['a'..'z']
 'y'
+With hlint this is so easy
 -}
 import Data.List
 import System.IO 
 
 tailor :: [a] -> a 
-tailor xs = do
-    last(init(xs))
+tailor xs = case xs of
+    [] -> error "Won't work"
+    [x,y] -> x
+    (_:x) -> tailor x
 
 main = do
-    print (show (tailor [3, 5, 6]))
+    print (tailor [3, 5, 6])

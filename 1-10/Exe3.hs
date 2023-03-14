@@ -18,26 +18,19 @@ Example in Haskell:
 import Data.List
 import System.IO 
 
-dec :: Int -> Int
-dec t = do
-    t-1
-
--- fine ill just aim  for the answer
-{-tailor :: [a] -> a -> a 
-tailor xs t = do
-    let loop = do
-        dec t
-        print(head(xs))
-        drop 1 xs
-        when(t\=0)
-    loop
-    return head(xs)
+{-tailor :: ([a], Int ) -> a
+tailor (xs, t) = case xs of
+    [] -> error "Won't work"
+    (x:y) -> if t == 1 then x else tailor(y, t)
+    (y:x:z) -> if length(y) == t then x else tailor (x:z, t)
+    (_:x) -> tailor (x, t)
 -}
-tailor :: [a] -> Int -> a
-tailor xs t = do
-    head(drop t xs)   
-    --return head xs
-    
 
+tailor(xs, t) = do
+    if null xs
+        then error "Won't work"
+        else xs !! (t-1)
+     
+    
 main = do
-    print (show (tailor [3, 5, 6] 0))
+    print(tailor([3,5,6,4,2,1],3))
